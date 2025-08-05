@@ -209,7 +209,7 @@ const AppContent = () => {
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.NODE_ENV === 'production' ? '/MuscleUp' : '/'}>
       <AuthProvider>
         <AppContent />
       </AuthProvider>
