@@ -2,9 +2,17 @@
 
 ![MuscleUp Logo](logo.png)
 
-MuscleUp is a comprehensive fitness tracking web application that helps users monitor their workouts, track nutrition, and achieve their fitness goals. Built with modern web technologies and featuring a beautiful glassmorphism design.
+MuscleUp is a comprehensive fitness tracking web application that helps users monitor their workouts, track nutrition, and achieve their fitness goals. Built with modern web technologies and featuring a beautiful glassmorphism design with enhanced authentication.
 
 ## 🌟 Features
+
+### 🔐 **Enhanced Authentication**
+- **Multiple Sign-In Options**: Email/Password, Google, Facebook, Apple OAuth
+- **Demo Mode**: Instant access with demo accounts (Demo User & Admin)
+- **Secure Registration**: Email validation and password requirements
+- **Modern UI**: Glass-morphism design with improved visibility and contrast
+- **Real-time Validation**: Instant feedback on form inputs
+- **Auto-redirect**: Seamless navigation after authentication
 
 ### 🏋️‍♂️ **Workout Tracking**
 - Log exercises with sets, reps, and weights
@@ -31,19 +39,35 @@ MuscleUp is a comprehensive fitness tracking web application that helps users mo
 - Personalized recommendations
 
 ### 🎨 **Modern UI/UX**
+- Enhanced glassmorphism design with better contrast
+- White accents for improved visibility
+- Smooth animations and hover effects
 - Responsive design for all devices
-- Glassmorphism visual effects
-- Smooth animations and transitions
-- Mobile-first approach
+- Mobile-first approach with enhanced touch interactions
+
+## � Quick Start
+
+### Try Demo Mode (Instant Access)
+1. Visit the application
+2. Click **"👤 Demo User Login"** or **"👑 Demo Admin Login"**
+3. Start using MuscleUp immediately!
+
+### OAuth Demo
+- Click **"Continue with Google/Facebook/Apple"** for OAuth simulation
+- Demo accounts created automatically
+
+### Create Your Account
+- Click **"Sign Up"** → Enter details → Start your fitness journey!
 
 ## 🛠️ Technology Stack
 
 ### Frontend
-- **HTML5** - Semantic markup and structure
-- **CSS3** - Modern styling with glassmorphism effects
-- **JavaScript (ES6+)** - Interactive functionality
+- **React 19+** - Modern UI library with hooks
+- **Styled Components** - CSS-in-JS styling solution
+- **React Router** - Client-side routing
+- **Axios** - HTTP client for API calls
+- **FontAwesome** - Comprehensive icon library
 - **Responsive Design** - Mobile-first approach
-- **Font Awesome** - Icon library
 
 ### Backend
 - **Node.js** - Server runtime

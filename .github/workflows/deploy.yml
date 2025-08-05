@@ -1,0 +1,49 @@
+name: Deploy MuscleUp to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: muscleup-react/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd muscleup-react
+        npm ci
+        
+    - name: Create production environment file
+      run: |
+        cd muscleup-react
+        echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL || 'https://your-muscleup-backend.onrender.com' }}" > .env.production
+        echo "GENERATE_SOURCEMAP=false" >> .env.production
+        echo "PUBLIC_URL=/MuscleUp" >> .env.production
+        echo "REACT_APP_APP_NAME=MuscleUp" >> .env.production
+        echo "REACT_APP_VERSION=1.0.0" >> .env.production
+        
+    - name: Build project
+      run: |
+        cd muscleup-react
+        npm run build
+        
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./muscleup-react/build
+        cname: # Add your custom domain here if you have one

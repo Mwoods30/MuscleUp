@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: muscleup-backend
+    env: node
+    buildCommand: cd muscleup-react/backend && npm install
+    startCommand: cd muscleup-react/backend && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        fromService:
+          type: web
+          name: muscleup-backend
+          property: port
+      - key: FRONTEND_URL
+        value: https://mwoods30.github.io/MuscleUp
+      - key: JWT_SECRET
+        generateValue: true
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100
+      - key: HELMET_ENABLED
+        value: true
+      - key: CORS_ENABLED
+        value: true
