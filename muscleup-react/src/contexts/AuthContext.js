@@ -31,8 +31,12 @@ export const AuthProvider = ({ children }) => {
   // Check if user is logged in on app load
   useEffect(() => {
     const checkAuth = async () => {
+      console.log('🔍 Checking authentication status...');
       const storedToken = localStorage.getItem('muscleup_token');
       const storedUser = localStorage.getItem('muscleup_user');
+      
+      console.log('📝 Stored token:', storedToken ? 'Found' : 'None');
+      console.log('👤 Stored user:', storedUser ? 'Found' : 'None');
       
       if (storedToken && storedUser) {
         try {
@@ -42,6 +46,8 @@ export const AuthProvider = ({ children }) => {
           const userData = JSON.parse(storedUser);
           setUser(userData);
           axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+          
+          console.log('✅ User authenticated from storage:', userData.email);
           
           // Optionally fetch fresh user data from server
           try {
@@ -58,7 +64,11 @@ export const AuthProvider = ({ children }) => {
           console.error('Error parsing stored user data:', error);
           logout();
         }
+      } else {
+        console.log('🚫 No stored authentication found');
       }
+      
+      console.log('✅ Authentication check complete');
       setLoading(false);
     };
 
