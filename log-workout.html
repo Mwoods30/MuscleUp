@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Workout - MusclesUp</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="log-workout.css">
+</head>
+<body>
+    <header class="header">
+        <h1>MusclesUp</h1>
+        <p>Log Your Workout</p>
+    </header>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="log-workout.html" class="active">Log Workout</a></li>
+                <li><a href="track-meals.html">Track Meals</a></li>
+                <li><a href="signin.html">Sign In/Up</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main">
+        <div class="main-content">
+            <h2>Log Your Workout</h2>
+            <p>Track your exercises, sets, reps, and weights to monitor your progress.</p>
+            
+            <form class="workout-form">
+                <div class="form-group">
+                    <label for="workout-date">Date</label>
+                    <input type="date" id="workout-date" name="workout-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workout-type">Workout Type</label>
+                    <select id="workout-type" name="workout-type" required>
+                        <option value="">Select workout type</option>
+                        <option value="strength">Strength Training</option>
+                        <option value="cardio">Cardio</option>
+                        <option value="flexibility">Flexibility</option>
+                        <option value="sports">Sports</option>
+                    </select>
+                </div>
+                
+                <div class="exercise-section">
+                    <h3>Exercises</h3>
+                    <div class="exercise-entry">
+                        <div class="form-group">
+                            <label for="exercise-name">Exercise Name</label>
+                            <input type="text" id="exercise-name" name="exercise-name" placeholder="e.g., Bench Press" required>
+                        </div>
+                        
+                        <div class="exercise-details">
+                            <div class="form-group">
+                                <label for="sets">Sets</label>
+                                <input type="number" id="sets" name="sets" min="1" placeholder="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="reps">Reps</label>
+                                <input type="number" id="reps" name="reps" min="1" placeholder="10">
+                            </div>
+                            <div class="form-group">
+                                <label for="weight">Weight (lbs)</label>
+                                <input type="number" id="weight" name="weight" min="0" step="0.1" placeholder="135">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="add-exercise-btn">
+                        <i class="fas fa-plus"></i> Add Another Exercise
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workout-notes">Notes (Optional)</label>
+                    <textarea id="workout-notes" name="workout-notes" rows="4" placeholder="How did the workout feel? Any observations..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Save Workout
+                    </button>
+                    <button type="button" class="cancel-btn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="recent-workouts">
+            <h3>Recent Workouts</h3>
+            <div class="workout-card">
+                <div class="workout-header">
+                    <h4>Upper Body Strength</h4>
+                    <span class="workout-date">Jan 3, 2025</span>
+                </div>
+                <div class="workout-summary">
+                    <p>5 exercises • 45 minutes</p>
+                    <div class="exercises-preview">
+                        <span>Bench Press, Pull-ups, Shoulder Press...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workout-card">
+                <div class="workout-header">
+                    <h4>Cardio Session</h4>
+                    <span class="workout-date">Jan 1, 2025</span>
+                </div>
+                <div class="workout-summary">
+                    <p>3 exercises • 30 minutes</p>
+                    <div class="exercises-preview">
+                        <span>Treadmill, Cycling, Rowing...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 MusclesUp. All rights reserved.</p>
+        <p>Privacy Policy | Terms of Service</p>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle (same as main page)
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const navbarMenu = document.getElementById('navbar-menu');
+
+        navbarToggle.addEventListener('click', () => {
+            navbarToggle.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('.navbar-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbarToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navbarToggle.contains(e.target) && !navbarMenu.contains(e.target)) {
+                navbarToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navbarToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            }
+        });
+
+        // Workout form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const workoutForm = document.querySelector('.workout-form');
+            const addExerciseBtn = document.querySelector('.add-exercise-btn');
+            const workoutDate = document.getElementById('workout-date');
+            
+            // Set today's date as default
+            workoutDate.valueAsDate = new Date();
+            
+            // Add exercise functionality
+            addExerciseBtn.addEventListener('click', function() {
+                const exerciseSection = document.querySelector('.exercise-section');
+                const newExercise = document.querySelector('.exercise-entry').cloneNode(true);
+                
+                // Clear the values in the cloned exercise
+                newExercise.querySelectorAll('input').forEach(input => input.value = '');
+                
+                exerciseSection.insertBefore(newExercise, addExerciseBtn);
+            });
+            
+            // Form submission
+            workoutForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Workout logged successfully! 💪');
+                // Here you would typically send the data to a server
+            });
+        });
+    </script>
+</body>
+</html>

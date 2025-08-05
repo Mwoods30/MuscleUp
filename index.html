@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusclesUp</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="MusclesUp Logo" class="header-logo">
+            </div>
+            <div class="header-text">
+                <h1>MusclesUp</h1>
+                <p>Your personal fitness companion</p>
+            </div>
+        </div>
+    </header>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/log-workout.html">Log Workout</a></li>
+                <li><a href="pages/track-meals.html">Track Meals</a></li>
+                <li><a href="pages/signin.html">Sign In/Up</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main">
+        <div class="main-content">
+            <h2>Welcome to MusclesUp</h2>
+            <p>Track your workouts, monitor your progress, and achieve your fitness goals with ease.</p>
+            
+            <button class="main-button" onclick="location.href='pages/signin.html'">Get Started</button>
+    
+        
+        </div>
+    
+        <div class="features">
+            <h2>Features</h2>
+            <ul class="feature-list">
+                <li><i class="fas fa-dumbbell"></i> Workout Tracking</li>
+                <li><i class="fas fa-chart-line"></i> Log Meals</li>
+                <li><i class="fas fa-check"></i>Customize Profile</li>
+            </ul>
+        </div>
+
+        <div class="testimonials">
+            <h2>What Our Users Say</h2>
+            <blockquote>
+                <p>"MusclesUp has transformed my fitness journey!"</p>
+                <footer>- Jane Doe</footer>
+            </blockquote>
+            <blockquote>
+                <p>"The best app for tracking workouts and staying motivated."</p>
+                <footer>- John Smith</footer>
+            </blockquote>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 MusclesUp. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="pages/privacy-policy.html">Privacy Policy</a>
+                <span class="separator">|</span>
+                <a href="pages/terms-of-service.html">Terms of Service</a>
+                <span class="separator">|</span>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const navbarMenu = document.getElementById('navbar-menu');
+
+        // Toggle mobile menu
+        navbarToggle.addEventListener('click', () => {
+            navbarToggle.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.navbar-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbarToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbarToggle.contains(e.target) && !navbarMenu.contains(e.target)) {
+                navbarToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu on window resize if it's open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navbarToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
