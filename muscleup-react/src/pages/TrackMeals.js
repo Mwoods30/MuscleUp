@@ -4,7 +4,7 @@ import axios from 'axios';
 import './TrackMeals.css';
 
 const TrackMeals = () => {
-  const { user } = useAuth();
+  const { user } = useAuth(); // eslint-disable-line no-unused-vars
   const [meal, setMeal] = useState({
     mealType: 'breakfast',
     foods: [],

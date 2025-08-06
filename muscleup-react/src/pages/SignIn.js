@@ -463,7 +463,7 @@ const SignIn = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const { login, register, oauthLogin } = useAuth();
+  const { login, register, oauthLogin } = useAuth(); // eslint-disable-line no-unused-vars
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {

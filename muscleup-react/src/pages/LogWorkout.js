@@ -4,7 +4,7 @@ import axios from 'axios';
 import './LogWorkout.css';
 
 const LogWorkout = () => {
-  const { user } = useAuth();
+  const { user } = useAuth(); // eslint-disable-line no-unused-vars
   const [workout, setWorkout] = useState({
     name: '',
     exercises: [],

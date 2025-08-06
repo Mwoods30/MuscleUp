@@ -5,7 +5,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+// import Home from './pages/Home'; // Unused for now
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import LogWorkout from './pages/LogWorkout';
