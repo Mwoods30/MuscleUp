@@ -248,7 +248,7 @@ const ToggleLabel = styled.span`
 `;
 
 export const ThemeToggle = ({ showLabel = true, compact = false }) => {
-  const { themeMode, changeTheme, isDark, isSystem } = useTheme();
+  const { themeMode, changeTheme, isDark } = useTheme();
 
   const buttonVariants = {
     active: { scale: 1, backgroundColor: 'var(--primary)' },

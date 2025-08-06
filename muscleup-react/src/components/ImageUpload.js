@@ -3,22 +3,16 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCamera,
   faImage,
-  faUpload,
   faTimes,
   faEdit,
   faTrash,
-  faDownload,
   faExpand,
-  faCompress,
   faSpinner,
-  faCheck,
-  faExclamationTriangle,
   faUser,
   faCalendar,
   faWeight,
-  faDumbbell
+  faDumbbell,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Main Container
@@ -191,13 +185,6 @@ const ProgressPhotoCard = styled(ImageCard)`
   border-left: 4px solid ${props => props.theme.colors.success};
 `;
 
-const ComparisonView = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1.5rem;
-`;
-
 const ProgressStats = styled.div`
   background: ${props => props.theme.colors.backgroundSecondary};
   border-radius: 8px;
@@ -368,7 +355,7 @@ export const ImageUpload = ({
     }
   }, [images.length, maxFiles, maxFileSize, acceptedTypes]);
 
-  const uploadFile = async (file) => {
+  const uploadFile = useCallback(async (file) => {
     const fileId = Date.now() + Math.random();
     
     // Simulate upload progress
@@ -420,7 +407,7 @@ export const ImageUpload = ({
         return newProgress;
       });
     }
-  };
+  }, [uploadType, onUpload]);
 
   const openFileDialog = () => {
     fileInputRef.current?.click();

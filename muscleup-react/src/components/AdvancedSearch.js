@@ -4,21 +4,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Fuse from 'fuse.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faSearch, 
-  faFilter, 
-  faTimes, 
+  faSearch,
+  faFilter,
+  faTimes,
   faCalendar, 
   faDumbbell,
   faUtensils,
-  faUser,
-  faSort,
   faSortUp,
   faSortDown,
-  faHistory,
-  faBookmark
-} from '@fortawesome/free-solid-svg-icons';
-
-// Main Search Container
+  faHistory
+} from '@fortawesome/free-solid-svg-icons';// Main Search Container
 const SearchContainer = styled(motion.div)`
   background: ${props => props.theme.colors.surface};
   border-radius: 16px;
@@ -275,19 +270,6 @@ const HistoryItem = styled(motion.button)`
   }
 `;
 
-// No Results
-const NoResults = styled(motion.div)`
-  text-align: center;
-  padding: 3rem 1rem;
-  color: ${props => props.theme.colors.textTertiary};
-`;
-
-const NoResultsIcon = styled.div`
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.5;
-`;
-
 // Advanced Search Component
 export const AdvancedSearch = ({ 
   data = [], 
@@ -325,20 +307,21 @@ export const AdvancedSearch = ({
     localStorage.setItem('muscleup-search-history', JSON.stringify(newHistory));
   }, [searchHistory, enableHistory]);
 
-  // Fuse.js configuration
-  const fuseOptions = {
-    keys: searchKeys,
-    threshold: 0.3,
-    includeScore: true,
-    includeMatches: true,
-    minMatchCharLength: 2,
-    shouldSort: true,
-    findAllMatches: true,
-    ignoreLocation: true,
-    useExtendedSearch: true
-  };
-
-  const fuse = useMemo(() => new Fuse(data, fuseOptions), [data, fuseOptions]);
+  // Fuse.js configuration and instance
+  const fuse = useMemo(() => {
+    const fuseOptions = {
+      keys: searchKeys,
+      threshold: 0.3,
+      includeScore: true,
+      includeMatches: true,
+      minMatchCharLength: 2,
+      shouldSort: true,
+      findAllMatches: true,
+      ignoreLocation: true,
+      useExtendedSearch: true
+    };
+    return new Fuse(data, fuseOptions);
+  }, [data, searchKeys]);
 
   // Search function
   const performSearch = useCallback((searchQuery, currentFilters = {}) => {
@@ -431,12 +414,6 @@ export const AdvancedSearch = ({
     performSearch('', {});
   };
 
-  // Use history item
-  const useHistoryItem = (historyQuery) => {
-    setQuery(historyQuery);
-    performSearch(historyQuery, filters);
-  };
-
   // Handle history item click
   const handleHistoryClick = useCallback((historyQuery) => {
     setQuery(historyQuery);
@@ -446,9 +423,7 @@ export const AdvancedSearch = ({
   // Effect to perform initial search
   useEffect(() => {
     performSearch(query, filters);
-  }, [sortBy, sortOrder]);
-
-  return (
+  }, [sortBy, sortOrder, performSearch, query, filters]);  return (
     <SearchContainer
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
