@@ -38,6 +38,9 @@ jobs:
       - name: Build
         run: |
           cd muscleup-react
+          echo "GENERATE_SOURCEMAP=false" > .env.production
+          echo "PUBLIC_URL=/MuscleUp" >> .env.production
+          echo "REACT_APP_API_URL=https://muscleup-backend.onrender.com" >> .env.production
           npm run build
           
       - name: Setup Pages
