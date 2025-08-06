@@ -149,6 +149,9 @@ const Profile = () => {
       if (response.data.success) {
         alert('Account deleted successfully. You will be logged out.');
         logout();
+        // Use the correct base path for GitHub Pages
+        const basePath = process.env.NODE_ENV === 'production' ? '/MuscleUp' : '';
+        window.location.href = `${basePath}/signin`;
       }
     } catch (error) {
       console.error('Error deleting account:', error);
@@ -162,6 +165,9 @@ const Profile = () => {
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
       logout();
+      // Use the correct base path for GitHub Pages
+      const basePath = process.env.NODE_ENV === 'production' ? '/MuscleUp' : '';
+      window.location.href = `${basePath}/signin`;
     }
   };
 

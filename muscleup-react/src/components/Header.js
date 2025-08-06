@@ -108,7 +108,9 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    window.location.href = '/signin';
+    // Use the correct base path for GitHub Pages
+    const basePath = process.env.NODE_ENV === 'production' ? '/MuscleUp' : '';
+    window.location.href = `${basePath}/signin`;
   };
 
   const handleImageError = (e) => {
