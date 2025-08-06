@@ -1,4 +1,4 @@
-/* Global Mobile Improvements */
+/* Enhanced Mobile Improvements */
 
 /* Fix iOS Safari 100vh issue */
 html, body {
@@ -23,27 +23,23 @@ input, select, textarea {
   font-size: 16px;
 }
 
-/* Mobile-first responsive breakpoints */
+/* Enhanced Mobile Typography */
 @media (max-width: 480px) {
   body {
     font-size: 14px;
+    line-height: 1.5;
   }
   
-  h1 {
-    font-size: 1.8rem !important;
-  }
-  
-  h2 {
-    font-size: 1.4rem !important;
-  }
-  
-  h3 {
-    font-size: 1.2rem !important;
-  }
+  h1 { font-size: 1.75rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.25rem !important; }
+  h4 { font-size: 1.125rem !important; }
+  h5 { font-size: 1rem !important; }
+  h6 { font-size: 0.875rem !important; }
   
   .container, .main-content {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 
@@ -51,6 +47,11 @@ input, select, textarea {
 @media (min-width: 481px) and (max-width: 768px) {
   body {
     font-size: 15px;
+  }
+  
+  .container, .main-content {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
 }
 
@@ -70,7 +71,7 @@ input, select, textarea {
   }
 }
 
-/* Improve form layouts on mobile */
+/* Enhanced form layouts on mobile */
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column !important;
@@ -84,14 +85,81 @@ input, select, textarea {
   input, select, textarea, button {
     width: 100% !important;
     box-sizing: border-box !important;
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
+  
+  /* Better button spacing on mobile */
+  button {
+    padding: 0.875rem 1.5rem !important;
+    font-size: 1rem !important;
+    min-height: 48px !important;
   }
 }
 
-/* Better mobile cards */
+/* Enhanced mobile cards */
 @media (max-width: 480px) {
   .card, .dashboard-card, .profile-card {
-    margin: 0.5rem !important;
+    margin: 0.75rem !important;
+    padding: 1.25rem !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* Better mobile navigation */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .nav-brand {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Enhanced mobile grid layouts */
+@media (max-width: 768px) {
+  .grid, .dashboard-grid, .profile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Better mobile spacing */
+@media (max-width: 480px) {
+  .section {
     padding: 1rem !important;
+  }
+  
+  .header {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .footer {
+    padding: 1rem !important;
+  }
+}
+
+/* Enhanced mobile interactions */
+@media (max-width: 768px) {
+  /* Larger tap targets */
+  .icon-button {
+    width: 48px !important;
+    height: 48px !important;
     border-radius: 12px !important;
+  }
+  
+  /* Better mobile focus states */
+  button:active, a:active {
+    transform: scale(0.98) !important;
+  }
+  
+  /* Improved mobile modals */
+  .modal {
+    margin: 1rem !important;
+    border-radius: 16px !important;
+    max-height: calc(100vh - 2rem) !important;
+    overflow-y: auto !important;
   }
 }

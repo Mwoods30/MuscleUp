@@ -6,24 +6,18 @@ import { faBars, faTimes, faHome, faDumbbell, faUtensils, faUser } from '@fortaw
 import { useAuth } from '../contexts/AuthContext';
 
 const NavContainer = styled.nav`
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-left: none;
-  border-right: none;
-  padding: 1.2rem 2rem;
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.15),
-    0 1px 8px rgba(255, 107, 107, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
   z-index: 100;
 
   @media (max-width: 768px) {
-    padding: 1rem;
-    position: sticky;
-    top: 0;
+    padding: 0.75rem 1rem;
   }
 `;
 
@@ -33,31 +27,24 @@ const NavContent = styled.div`
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  
-  @media (max-width: 768px) {
-    justify-content: space-between;
-    width: 100%;
-  }
 `;
 
 const Brand = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  color: #667eea;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   
   @media (max-width: 768px) {
-    font-size: 1.3rem;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 `;
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -85,99 +72,88 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  color: ${props => props.isActive ? '#fff' : 'rgba(255, 255, 255, 0.9)'};
+  color: #4a5568;
   text-decoration: none;
-  font-weight: ${props => props.isActive ? '700' : '600'};
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: ${props => props.isActive ? 
-    'linear-gradient(135deg, rgba(255, 107, 107, 0.3) 0%, rgba(220, 20, 60, 0.2) 100%)' : 
-    'transparent'};
-  border: 2px solid ${props => props.isActive ? 'rgba(255, 107, 107, 0.5)' : 'transparent'};
-  text-shadow: ${props => props.isActive ? '0 1px 3px rgba(0,0,0,0.4)' : '0 1px 2px rgba(0,0,0,0.3)'};
-  box-shadow: ${props => props.isActive ? 
-    '0 4px 20px rgba(255, 107, 107, 0.3), inset 0 1px 0 rgba(255,255,255,0.2)' : 
-    'none'};
+  font-size: 0.875rem;
+  
+  ${props => props.isActive && `
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+    font-weight: 600;
+  `}
 
   &:hover {
-    color: #fff;
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.4) 0%, rgba(220, 20, 60, 0.3) 100%);
-    border-color: rgba(255, 107, 107, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 
-      0 6px 25px rgba(255, 107, 107, 0.4),
-      inset 0 1px 0 rgba(255,255,255,0.3);
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-
-  &:active {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
     transform: translateY(-1px);
   }
 
+  &:active {
+    transform: translateY(0);
+  }
+
   @media (max-width: 768px) {
-    font-size: 1.4rem;
-    padding: 1.2rem 2rem;
+    color: white;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
     width: 80%;
     text-align: center;
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.3) 0%, rgba(220, 20, 60, 0.2) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 30px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    
+    ${props => props.isActive && `
+      background: rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.5);
+    `}
     
     &:hover {
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.5) 0%, rgba(220, 20, 60, 0.4) 100%);
-      border-color: rgba(255, 107, 107, 0.6);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(255, 107, 107, 0.4);
+      background: rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.5);
+      transform: translateY(-2px);
+      color: white;
     }
   }
 
   @media (max-width: 480px) {
-    font-size: 1.2rem;
-    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
     width: 90%;
   }
 `;
 
 const MenuToggle = styled.button`
   display: none;
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(220, 20, 60, 0.1) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1.5rem;
+  background: #667eea;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.25rem;
   cursor: pointer;
   z-index: 10000;
   position: relative;
-  padding: 0.8rem 1rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  padding: 0.75rem;
+  transition: all 0.2s ease;
 
   &:hover {
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.4) 0%, rgba(220, 20, 60, 0.3) 100%);
-    border-color: rgba(255, 107, 107, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    background: #5a67d8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
 
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
   }
 
   @media (max-width: 768px) {
     display: block;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.3rem;
-    padding: 0.7rem 0.9rem;
   }
 `;
 
@@ -186,24 +162,23 @@ const CloseButton = styled.button`
   position: absolute;
   top: 2rem;
   right: 2rem;
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.3) 0%, rgba(220, 20, 60, 0.2) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  color: #fff;
-  font-size: 1.8rem;
+  color: white;
+  font-size: 1.5rem;
   cursor: pointer;
   z-index: 10001;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 
   &:hover {
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.5) 0%, rgba(220, 20, 60, 0.4) 100%);
-    border-color: rgba(255, 107, 107, 0.7);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: rotate(90deg) scale(1.1);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
   }
 
   @media (max-width: 768px) {
@@ -215,9 +190,9 @@ const CloseButton = styled.button`
   @media (max-width: 480px) {
     top: 1.5rem;
     right: 1.5rem;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.25rem;
   }
 `;
 
