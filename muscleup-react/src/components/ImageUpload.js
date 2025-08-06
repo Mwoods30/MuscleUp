@@ -309,52 +309,7 @@ export const ImageUpload = ({
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
 
-  const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    setIsDragActive(false);
-    
-    const files = Array.from(e.dataTransfer.files);
-    handleFiles(files);
-  }, []);
-
-  const handleDragOver = useCallback((e) => {
-    e.preventDefault();
-    setIsDragActive(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e) => {
-    e.preventDefault();
-    setIsDragActive(false);
-  }, []);
-
-  const handleFileSelect = useCallback((e) => {
-    const files = Array.from(e.target.files);
-    handleFiles(files);
-  }, []);
-
-  const handleFiles = useCallback(async (files) => {
-    const validFiles = files.filter(file => {
-      if (!acceptedTypes.includes(file.type)) {
-        alert(`File type ${file.type} not supported`);
-        return false;
-      }
-      if (file.size > maxFileSize) {
-        alert(`File ${file.name} is too large. Max size: ${maxFileSize / 1024 / 1024}MB`);
-        return false;
-      }
-      return true;
-    });
-
-    if (images.length + validFiles.length > maxFiles) {
-      alert(`Cannot upload more than ${maxFiles} files`);
-      return;
-    }
-
-    for (const file of validFiles) {
-      await uploadFile(file);
-    }
-  }, [images.length, maxFiles, maxFileSize, acceptedTypes]);
-
+  // Upload file function - defined first to avoid use-before-define
   const uploadFile = useCallback(async (file) => {
     const fileId = Date.now() + Math.random();
     
@@ -408,6 +363,54 @@ export const ImageUpload = ({
       });
     }
   }, [uploadType, onUpload]);
+
+  // Handle files function - uses uploadFile
+  const handleFiles = useCallback(async (files) => {
+    const validFiles = files.filter(file => {
+      if (!acceptedTypes.includes(file.type)) {
+        alert(`File type ${file.type} not supported`);
+        return false;
+      }
+      if (file.size > maxFileSize) {
+        alert(`File ${file.name} is too large. Max size: ${maxFileSize / 1024 / 1024}MB`);
+        return false;
+      }
+      return true;
+    });
+
+    if (images.length + validFiles.length > maxFiles) {
+      alert(`Cannot upload more than ${maxFiles} files`);
+      return;
+    }
+
+    for (const file of validFiles) {
+      await uploadFile(file);
+    }
+  }, [images.length, maxFiles, maxFileSize, acceptedTypes, uploadFile]);
+
+  // Event handlers - use handleFiles
+  const handleDrop = useCallback((e) => {
+    e.preventDefault();
+    setIsDragActive(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    handleFiles(files);
+  }, [handleFiles]);
+
+  const handleDragOver = useCallback((e) => {
+    e.preventDefault();
+    setIsDragActive(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e) => {
+    e.preventDefault();
+    setIsDragActive(false);
+  }, []);
+
+  const handleFileSelect = useCallback((e) => {
+    const files = Array.from(e.target.files);
+    handleFiles(files);
+  }, [handleFiles]);
 
   const openFileDialog = () => {
     fileInputRef.current?.click();
