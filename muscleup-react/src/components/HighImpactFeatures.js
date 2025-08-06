@@ -430,7 +430,7 @@ export const HighImpactFeatures = () => {
         <SectionHeader>
           <SectionTitle>
             <SectionIcon>
-              <FontAwesomeIcon icon={faTarget} />
+              <FontAwesomeIcon icon={faBullseye} />
             </SectionIcon>
             High-Impact Features Summary
           </SectionTitle>

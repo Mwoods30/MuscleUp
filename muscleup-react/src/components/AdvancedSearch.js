@@ -437,6 +437,12 @@ export const AdvancedSearch = ({
     performSearch(historyQuery, filters);
   };
 
+  // Handle history item click
+  const handleHistoryClick = useCallback((historyQuery) => {
+    setQuery(historyQuery);
+    performSearch(historyQuery, filters);
+  }, [performSearch, filters]);
+
   // Effect to perform initial search
   useEffect(() => {
     performSearch(query, filters);
@@ -490,7 +496,7 @@ export const AdvancedSearch = ({
             {searchHistory.map((item, index) => (
               <HistoryItem
                 key={index}
-                onClick={() => useHistoryItem(item)}
+                onClick={() => handleHistoryClick(item)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
