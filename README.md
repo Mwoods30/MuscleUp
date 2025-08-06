@@ -177,7 +177,7 @@ Create a `.env` file in the `backend` directory:
 ```env
 # Database
 MONGODB_URI=mongodb://localhost:27017/muscleup
-# or use MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/muscleup
+# or use MongoDB Atlas: mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/muscleup
 
 # JWT Secret
 JWT_SECRET=your-super-secret-jwt-key-here

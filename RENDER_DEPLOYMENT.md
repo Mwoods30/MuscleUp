@@ -114,7 +114,7 @@ curl https://your-render-url.onrender.com/api/health
 1. **Create MongoDB Atlas account**
 2. **Create free cluster**
 3. **Update MONGODB_URI** in Render environment variables
-4. **Example**: `mongodb+srv://username:password@cluster.mongodb.net/muscleup`
+4. **Example**: `mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/muscleup`
 
 ## Your Deployment URLs:
 - **Frontend**: https://mwoods30.github.io/MuscleUp/
