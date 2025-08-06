@@ -5,6 +5,8 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ToastProvider from './components/ToastProvider';
+import FloatingActionButton from './components/FloatingActionButton';
 // import Home from './pages/Home'; // Unused for now
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
@@ -202,6 +204,9 @@ const AppContent = () => {
               element={<Navigate to={isAuthenticated ? "/" : "/signin"} replace />} 
             />
           </Routes>
+          
+          {/* Enhanced UI Components */}
+          {isAuthenticated && <FloatingActionButton />}
         </div>
       </MainContent>
       <Footer />
@@ -213,7 +218,9 @@ function App() {
   return (
     <Router basename={process.env.NODE_ENV === 'production' ? '/MuscleUp' : '/'}>
       <AuthProvider>
-        <AppContent />
+        <ToastProvider>
+          <AppContent />
+        </ToastProvider>
       </AuthProvider>
     </Router>
   );
