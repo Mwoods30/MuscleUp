@@ -253,6 +253,7 @@
 @media (max-width: 768px) {
   .dashboard {
     padding: 1rem;
+    min-height: calc(100vh - 80px);
   }
   
   .dashboard-grid {
@@ -280,5 +281,37 @@
   
   .action-buttons {
     grid-template-columns: 1fr;
+  }
+  
+  .dashboard-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 0.5rem;
+  }
+  
+  .dashboard-header {
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .dashboard-card {
+    padding: 1rem;
+    border-radius: 15px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .stat-item {
+    padding: 1rem;
   }
 }

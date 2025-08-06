@@ -135,7 +135,12 @@ const TermsOfService = () => {
           <p>
             If you have any questions about these Terms, please contact us at:
           </p>
-      
+          <p>
+            <strong>Email:</strong> legal@muscleup.app<br />
+            <strong>Address:</strong> MuscleUp Fitness App<br />
+            123 Fitness Street<br />
+            Health City, HC 12345
+          </p>
         </section>
       </div>
     </div>
