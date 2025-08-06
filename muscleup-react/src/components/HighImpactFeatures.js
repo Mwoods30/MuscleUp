@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { InteractiveCharts, ChartDashboard } from './InteractiveCharts';
-import { AdvancedSearch, WorkoutSearch, MealSearch } from './AdvancedSearch';
-import { DragDropList, WorkoutList, ExerciseList } from './DragDropList';
-import { ImageUpload, ProgressPhotos, ProfilePictureUpload } from './ImageUpload';
+import { ChartDashboard } from './InteractiveCharts';
+import { WorkoutSearch, MealSearch } from './AdvancedSearch';
+import { WorkoutList } from './DragDropList';
+import { ProgressPhotos, ProfilePictureUpload } from './ImageUpload';
 import { ThemeToggle } from './ThemeSystem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,7 +17,6 @@ import {
   faDumbbell,
   faUtensils,
   faUser,
-  faCalendar,
   faBolt,
   faBullseye
 } from '@fortawesome/free-solid-svg-icons';
@@ -180,7 +179,7 @@ const sampleProgressPhotos = [
   {
     id: '1',
     name: 'Front Progress - January',
-    src: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNDBDMTIwIDQwIDEzMCA2MCAx' + 'MzAgMTAwQzEzMCAxNDAgMTIwIDE2MCAxMDAgMTYwQzgwIDE2MCA3MCAxNDAgNzAgMTAwQzcwIDYwIDgwIDQwIDEwMCA0MFoiIGZpbGw9IiNEREU3RkYiLz4KPHN2Zz4K',
+    src: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNDBDMTIwIDQwIDEzMCA2MCAxMzAgMTAwQzEzMCAxNDAgMTIwIDE2MCAxMDAgMTYwQzgwIDE2MCA3MCAxNDAgNzAgMTAwQzcwIDYwIDgwIDQwIDEwMCA0MFoiIGZpbGw9IiNEREU3RkYiLz4KPHN2Zz4K',
     size: 1024000,
     type: 'image/svg+xml',
     uploadedAt: new Date().toISOString(),
@@ -192,10 +191,7 @@ const sampleProgressPhotos = [
 
 export const HighImpactFeatures = () => {
   const [workouts, setWorkouts] = useState(sampleWorkouts);
-  const [meals] = useState(sampleMeals);
   const [progressPhotos, setProgressPhotos] = useState(sampleProgressPhotos);
-  const [workoutSearchResults, setWorkoutSearchResults] = useState(sampleWorkouts);
-  const [mealSearchResults, setMealSearchResults] = useState(sampleMeals);
 
   const handleWorkoutReorder = (newWorkouts) => {
     setWorkouts(newWorkouts);
@@ -317,7 +313,6 @@ export const HighImpactFeatures = () => {
             </CardDescription>
             <WorkoutSearch 
               workouts={sampleWorkouts}
-              onResults={setWorkoutSearchResults}
             />
           </FeatureCard>
           
@@ -334,7 +329,6 @@ export const HighImpactFeatures = () => {
             </CardDescription>
             <MealSearch 
               meals={sampleMeals}
-              onResults={setMealSearchResults}
             />
           </FeatureCard>
         </FeatureGrid>
