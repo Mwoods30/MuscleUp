@@ -11,6 +11,8 @@ import Dashboard from './pages/Dashboard';
 import LogWorkout from './pages/LogWorkout';
 import TrackMeals from './pages/TrackMeals';
 import Profile from './pages/Profile';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -184,11 +186,11 @@ const AppContent = () => {
             />
             <Route 
               path="/privacy-policy" 
-              element={<div>Privacy Policy Page - Coming Soon</div>} 
+              element={<PrivacyPolicy />} 
             />
             <Route 
               path="/terms-of-service" 
-              element={<div>Terms of Service Page - Coming Soon</div>} 
+              element={<TermsOfService />} 
             />
             <Route 
               path="/contact" 

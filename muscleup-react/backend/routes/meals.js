@@ -12,7 +12,9 @@ router.get('/', (req, res) => {
   
   res.json({
     success: true,
-    meals: userMeals
+    data: {
+      meals: userMeals
+    }
   });
 });
 
@@ -29,6 +31,27 @@ router.get('/date/:date', (req, res) => {
   res.json({
     success: true,
     meals: dateMeals
+  });
+});
+
+// Get daily meals (for dashboard)
+router.get('/daily/:date', (req, res) => {
+  const userId = req.user?.id;
+  const targetDate = req.params.date;
+  
+  const dateMeals = meals.filter(m => {
+    if (m.userId !== userId) return false;
+    
+    // Handle both string dates and Date objects
+    const mealDate = typeof m.date === 'string' ? m.date : m.date.toISOString().split('T')[0];
+    return mealDate === targetDate;
+  });
+  
+  res.json({
+    success: true,
+    data: {
+      meals: dateMeals
+    }
   });
 });
 

@@ -12,7 +12,9 @@ router.get('/', (req, res) => {
   
   res.json({
     success: true,
-    workouts: userWorkouts
+    data: {
+      workouts: userWorkouts
+    }
   });
 });
 

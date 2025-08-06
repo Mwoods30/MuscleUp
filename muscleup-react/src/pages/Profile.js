@@ -293,53 +293,48 @@ const Profile = () => {
                 />
               </div>
 
+              <div className="form-group">
+                <label htmlFor="fitnessGoal">Primary Goal</label>
+                <select
+                  id="fitnessGoal"
+                  name="fitnessGoal"
+                  value={profile.fitnessGoal}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                >
+                  <option value="">Select a goal</option>
+                  {fitnessGoals.map(goal => (
+                    <option key={goal.value} value={goal.value}>
+                      {goal.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="activityLevel">Activity Level</label>
+                <select
+                  id="activityLevel"
+                  name="activityLevel"
+                  value={profile.activityLevel}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                >
+                  <option value="">Select activity level</option>
+                  {activityLevels.map(level => (
+                    <option key={level.value} value={level.value}>
+                      {level.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {isEditing && (
                 <button type="submit" className="save-btn" disabled={loading}>
                   {loading ? 'Saving...' : 'Save Changes'}
                 </button>
               )}
             </form>
-          </div>
-
-          {/* Fitness Goals Card */}
-          <div className="profile-card">
-            <h2>Fitness Goals</h2>
-            
-            <div className="form-group">
-              <label htmlFor="fitnessGoal">Primary Goal</label>
-              <select
-                id="fitnessGoal"
-                name="fitnessGoal"
-                value={profile.fitnessGoal}
-                onChange={handleInputChange}
-                disabled={!isEditing}
-              >
-                <option value="">Select a goal</option>
-                {fitnessGoals.map(goal => (
-                  <option key={goal.value} value={goal.value}>
-                    {goal.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="activityLevel">Activity Level</label>
-              <select
-                id="activityLevel"
-                name="activityLevel"
-                value={profile.activityLevel}
-                onChange={handleInputChange}
-                disabled={!isEditing}
-              >
-                <option value="">Select activity level</option>
-                {activityLevels.map(level => (
-                  <option key={level.value} value={level.value}>
-                    {level.label}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
           {/* Health Stats Card */}
