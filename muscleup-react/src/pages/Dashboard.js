@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import HighImpactFeatures from '../components/HighImpactFeatures';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -79,83 +80,71 @@ const Dashboard = () => {
         <p>Ready to crush your fitness goals today?</p>
       </div>
 
-      <div className="dashboard-grid">
-        {/* Quick Stats */}
-        <div className="dashboard-card stats-card">
-          <h2>This Week</h2>
-          <div className="stats-grid">
+      {/* High Impact Features Showcase */}
+      <HighImpactFeatures />
+
+      <div className="dashboard-content">
+        {/* Today's Overview */}
+        <div className="dashboard-card overview">
+          <h2>Today's Overview</h2>
+          <div className="overview-stats">
             <div className="stat-item">
-              <span className="stat-number">{dashboardData.weeklyStats.workouts}</span>
-              <span className="stat-label">Workouts</span>
+              <div className="stat-icon">💪</div>
+              <div className="stat-details">
+                <h3>{dashboardData.todayWorkouts.length}</h3>
+                <p>Workouts</p>
+              </div>
             </div>
             <div className="stat-item">
-              <span className="stat-number">{dashboardData.weeklyStats.calories}</span>
-              <span className="stat-label">Avg Calories</span>
+              <div className="stat-icon">🍽️</div>
+              <div className="stat-details">
+                <h3>{dashboardData.todayMeals.length}</h3>
+                <p>Meals Logged</p>
+              </div>
             </div>
             <div className="stat-item">
-              <span className="stat-number">{dashboardData.weeklyStats.totalWorkoutTime}m</span>
-              <span className="stat-label">Total Time</span>
+              <div className="stat-icon">�</div>
+              <div className="stat-details">
+                <h3>{dashboardData.weeklyStats.calories}</h3>
+                <p>Calories</p>
+              </div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">⏱️</div>
+              <div className="stat-details">
+                <h3>{dashboardData.weeklyStats.totalWorkoutTime}</h3>
+                <p>Minutes</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Today's Workouts */}
-        <div className="dashboard-card">
-          <h2>Today's Workouts</h2>
-          {dashboardData.todayWorkouts.length > 0 ? (
-            <div className="activity-list">
-              {dashboardData.todayWorkouts.map((workout, index) => (
-                <div key={index} className="activity-item">
-                  <div className="activity-icon workout-icon">💪</div>
-                  <div className="activity-details">
-                    <h3>{workout.name}</h3>
-                    <p>{workout.duration} minutes • {workout.exercises?.length || 0} exercises</p>
-                  </div>
-                </div>
-              ))}
+        {/* Weekly Progress */}
+        <div className="dashboard-card progress">
+          <h2>This Week's Progress</h2>
+          <div className="progress-stats">
+            <div className="progress-item">
+              <div className="progress-label">
+                <span>Workouts Completed</span>
+                <span>{dashboardData.weeklyStats.workouts}/7</span>
+              </div>
+              <div className="progress-bar">
+                <div 
+                  className="progress-fill workout-progress"
+                  style={{ width: `${(dashboardData.weeklyStats.workouts / 7) * 100}%` }}
+                ></div>
+              </div>
             </div>
-          ) : (
-            <div className="empty-state">
-              <p>No workouts logged today</p>
-              <Link to="/log-workout" className="btn-primary">
-                Log Workout
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Today's Meals */}
-        <div className="dashboard-card">
-          <h2>Today's Nutrition</h2>
-          {dashboardData.todayMeals.length > 0 ? (
-            <div className="activity-list">
-              {dashboardData.todayMeals.slice(0, 3).map((meal, index) => (
-                <div key={index} className="activity-item">
-                  <div className="activity-icon meal-icon">🍽️</div>
-                  <div className="activity-details">
-                    <h3>{meal.mealType}</h3>
-                    <p>{meal.calories || 0} calories</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="empty-state">
-              <p>No meals logged today</p>
-              <Link to="/track-meals" className="btn-primary">
-                Track Meals
-              </Link>
-            </div>
-          )}
+          </div>
         </div>
 
         {/* Recent Activity */}
-        <div className="dashboard-card recent-activity">
+        <div className="dashboard-card activity">
           <h2>Recent Activity</h2>
           <div className="activity-list">
             {dashboardData.recentActivity.map((activity, index) => (
               <div key={index} className="activity-item">
-                <div className={`activity-icon ${activity.type}-icon`}>
+                <div className="activity-icon">
                   {activity.type === 'workout' ? '💪' : '🍽️'}
                 </div>
                 <div className="activity-details">

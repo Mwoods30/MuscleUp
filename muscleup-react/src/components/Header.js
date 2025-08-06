@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../contexts/AuthContext';
+import { ThemeToggle } from './ThemeSystem';
 
 const HeaderContainer = styled.header`
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: ${props => props.theme.mode === 'dark' 
+    ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)'
+    : 'linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%)'
+  };
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid ${props => props.theme.mode === 'dark' 
+    ? 'rgba(255, 255, 255, 0.3)'
+    : 'rgba(255, 255, 255, 0.4)'
+  };
   border-left: none;
   border-right: none;
   padding: 1rem 2rem;
@@ -16,9 +23,13 @@ const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: all 0.3s ease;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.2),
-    0 2px 16px rgba(255, 107, 107, 0.1),
+    ${props => props.theme.mode === 'dark' 
+      ? '0 2px 16px rgba(255, 107, 107, 0.1)'
+      : '0 2px 16px rgba(102, 126, 234, 0.1)'
+    },
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 `;
 
@@ -46,18 +57,25 @@ const LogoImage = styled.img`
 `;
 
 const LogoText = styled.h1`
-  color: #fff;
+  color: ${props => props.theme.colors.textInverse};
   font-size: 2rem;
   font-weight: 800;
   margin: 0;
   text-shadow: 
     2px 2px 4px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(255, 107, 107, 0.3);
-  background: linear-gradient(45deg, #fff 0%, #FF6B6B 30%, #DC143C 70%, #fff 100%);
+    ${props => props.theme.mode === 'dark' 
+      ? '0 0 20px rgba(255, 107, 107, 0.3)'
+      : '0 0 20px rgba(102, 126, 234, 0.3)'
+    };
+  background: ${props => props.theme.mode === 'dark' 
+    ? 'linear-gradient(45deg, #fff 0%, #FF6B6B 30%, #DC143C 70%, #fff 100%)'
+    : 'linear-gradient(45deg, #fff 0%, #667eea 30%, #764ba2 70%, #fff 100%)'
+  };
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  transition: all 0.3s ease;
   
   &::after {
     content: '';
@@ -66,8 +84,12 @@ const LogoText = styled.h1`
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #FF6B6B, transparent);
+    background: ${props => props.theme.mode === 'dark' 
+      ? 'linear-gradient(90deg, transparent, #FF6B6B, transparent)'
+      : 'linear-gradient(90deg, transparent, #667eea, transparent)'
+    };
     border-radius: 1px;
+    transition: background 0.3s ease;
   }
 `;
 
@@ -75,19 +97,34 @@ const UserInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: #fff;
+  color: ${props => props.theme.colors.textInverse};
+  
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
 `;
 
 const WelcomeText = styled.span`
   font-size: 1.1rem;
   font-weight: 500;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    display: none;
+  }
 `;
 
 const LogoutButton = styled.button`
-  background: rgba(255, 107, 107, 0.2);
-  border: 1px solid rgba(255, 107, 107, 0.4);
-  color: #fff;
+  background: ${props => props.theme.mode === 'dark' 
+    ? 'rgba(255, 107, 107, 0.2)'
+    : 'rgba(102, 126, 234, 0.2)'
+  };
+  border: 1px solid ${props => props.theme.mode === 'dark' 
+    ? 'rgba(255, 107, 107, 0.4)'
+    : 'rgba(102, 126, 234, 0.4)'
+  };
+  color: ${props => props.theme.colors.textInverse};
   padding: 0.5rem 1rem;
   border-radius: 25px;
   cursor: pointer;
@@ -96,10 +133,19 @@ const LogoutButton = styled.button`
   backdrop-filter: blur(10px);
 
   &:hover {
-    background: rgba(255, 107, 107, 0.3);
-    border-color: rgba(255, 107, 107, 0.6);
+    background: ${props => props.theme.mode === 'dark' 
+      ? 'rgba(255, 107, 107, 0.3)'
+      : 'rgba(102, 126, 234, 0.3)'
+    };
+    border-color: ${props => props.theme.mode === 'dark' 
+      ? 'rgba(255, 107, 107, 0.6)'
+      : 'rgba(102, 126, 234, 0.6)'
+    };
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+    box-shadow: ${props => props.theme.mode === 'dark' 
+      ? '0 4px 16px rgba(255, 107, 107, 0.3)'
+      : '0 4px 16px rgba(102, 126, 234, 0.3)'
+    };
   }
 `;
 
@@ -136,6 +182,7 @@ const Header = () => {
       
       {isAuthenticated && user && (
         <UserInfo>
+          <ThemeToggle compact />
           <WelcomeText>Welcome, {user.name || user.email}!</WelcomeText>
           <LogoutButton onClick={handleLogout}>
             Logout

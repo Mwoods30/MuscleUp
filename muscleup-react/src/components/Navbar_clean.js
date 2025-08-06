@@ -6,7 +6,7 @@ import { faBars, faTimes, faHome, faDumbbell, faUtensils, faUser } from '@fortaw
 import { useAuth } from '../contexts/AuthContext';
 
 const NavContainer = styled.nav`
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -32,7 +32,7 @@ const NavContent = styled.div`
 const Brand = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #667eea;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -84,7 +84,7 @@ const NavLink = styled(Link)`
   font-size: 0.875rem;
   
   ${props => props.isActive && `
-    color: #ffffff;
+    color: #667eea;
     background: rgba(102, 126, 234, 0.1);
     font-weight: 600;
   `}
@@ -230,7 +230,7 @@ const Navbar = () => {
   return (
     <NavContainer>
       <NavContent>
-        <Brand>MuscleUp</Brand>
+        <Brand>💪 MuscleUp</Brand>
         
         <MenuToggle onClick={toggleMenu}>
           <FontAwesomeIcon icon={faBars} />
